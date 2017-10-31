@@ -26,8 +26,8 @@ public class LoginController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserCommand command = FormUtil.populate(UserCommand.class, request);
-        UserDTO pojo = command.getPojo();
+//        UserCommand command = FormUtil.populate(UserCommand.class, request);
+//        UserDTO pojo = command.getPojo();
         RequestDispatcher rd = request.getRequestDispatcher("/views/web/login.jsp");
         rd.forward(request, response);
     }
