@@ -2,7 +2,7 @@
 <suite name="TestAll">
     <test name="case1">
         <classes>
-            <class name="longtq2.api.test.ApiTest" />
+            <class name="longtq2.api.test.LoginTest" />
         </classes>
     </test>
 </suite>
