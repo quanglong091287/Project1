@@ -10,7 +10,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements UserDao {
-    public UserEntity isUserExits(String name, String password) {
+    public UserEntity findUserByUsernameAndPassword(String name, String password) {
         UserEntity entity = new UserEntity();
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
@@ -28,25 +28,5 @@ public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements Use
             session.close();
         }
         return entity;
-    }
-
-    public UserEntity findRoleByUser(String name, String password) {
-        UserEntity entity1 = new UserEntity();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        try{
-            StringBuilder sql1 = new StringBuilder("FROM UserEntity WHERE name= :name AND password= :password");
-            Query query1 = session.createQuery(sql1.toString());
-            query1.setParameter("name", name);
-            query1.setParameter("password", password);
-            entity1 = (UserEntity) query1.uniqueResult();
-            transaction.commit();
-        }catch (HibernateException e){
-            transaction.rollback();
-            throw e;
-        }finally {
-            session.close();
-        }
-        return entity1;
     }
 }
