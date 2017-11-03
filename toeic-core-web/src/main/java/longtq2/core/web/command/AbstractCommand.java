@@ -5,7 +5,7 @@ import java.util.List;
 public class AbstractCommand<T> {
     protected T pojo;//pojo la plain old java object.lop java bean thuan
     private String crudaction;// dung de them sua xoa cac chuc nang
-    private List<T> listResult;
+    private List<T> listResult; //dung trong display tag
     private String tableId = "tableList";
     private int maxPageItems = 5;
     private int totalItems = 0;

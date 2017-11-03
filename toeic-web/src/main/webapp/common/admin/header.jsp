@@ -18,22 +18,16 @@
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+						Wellcom, [Tên]
 
-									<span class="user-info">
-										<small>Xin chào,</small>
-										<%--${username}--%>
-									</span>
-                        <i class="ace-icon fa fa-caret-down"></i>
                     </a>
 
-                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <li>
+                   <li class="light-blue dropdown-modal">
                             <a href="#">
                                 <i class="ace-icon fa fa-power-off"></i>
-                                Thoát
+                                <fmt:message key="label.logout" bundle="${lang}"/>
                             </a>
-                        </li>
-                    </ul>
+                    </li>
                 </li>
             </ul>
         </div>
