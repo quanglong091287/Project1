@@ -7,7 +7,7 @@ public class AbstractCommand<T> {
     private String crudaction;// dung de them sua xoa cac chuc nang
     private List<T> listResult; //dung trong display tag
     private String tableId = "tableList";
-    private int maxPageItems = 5;
+    private int maxPageItems = 20;
     private int totalItems = 0;
     private int firstItem = 0;
     private String sortExpression;
