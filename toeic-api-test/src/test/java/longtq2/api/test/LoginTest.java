@@ -43,15 +43,15 @@ public class LoginTest {
         RoleEntity entity =  roleDao.finfById(1);
     }
 
-    @Test
-    public void checkFindByProperty(){
-        RoleDao roleDao = new RoleDaoImpl();
-        String property = null;
-        Object value = null;
-        String sortExpression = null;
-        String sortDirection = null;
-        Object[] objects = roleDao.findByProperty(property, value, sortExpression, sortDirection, 0, 2);
-    }
+    //@Test
+//    public void checkFindByProperty(){
+//        RoleDao roleDao = new RoleDaoImpl();
+//        String property = null;
+//        Object value = null;
+//        String sortExpression = null;
+//        String sortDirection = null;
+//        Object[] objects = roleDao.findByProperty(property, value, sortExpression, sortDirection, 0, 2);
+//    }
 
     @Test
     public  void checkDelete(){

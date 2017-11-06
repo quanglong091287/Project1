@@ -2,7 +2,9 @@
 <suite name="TestAll">
     <test name="case1">
         <classes>
+            <class name="longtq2.api.test.ListenGuidelineTest" />
             <class name="longtq2.api.test.LoginTest" />
+            <class name="longtq2.api.test.reviewHashMap" />
         </classes>
     </test>
 </suite>

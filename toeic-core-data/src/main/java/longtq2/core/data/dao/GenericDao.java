@@ -2,6 +2,7 @@ package longtq2.core.data.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 // interface viet phuong thuc khong co ten ham
 //interface la ham con cua ham class.
 // genericDao la ham con cua AbstractDao
@@ -12,7 +13,7 @@ public interface GenericDao<ID extends Serializable, T> {
     T update(T entity);
     public void save(T entity);
     T finfById(ID id);
-    Object[] findByProperty(String property, Object value, String sortExpression, String sortDirection, Integer offset, Integer limit);
+    Object[] findByProperty(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit);
     Integer delete(List<ID> ids);
 }
 

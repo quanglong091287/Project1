@@ -24,10 +24,10 @@ public class ListenGuidelineController extends HttpServlet {
         ListenGuidelineCommand command = new ListenGuidelineCommand();
         command.setMaxPageItems(2);
         RequestUtil.initSearchBean(request, command);
-        Object[] objects = listenGuidelineService.findListenGuidelineByProperty(null, command.getFirstItem(), command.getSortExpression(),command.getSortDirection(), command.getFirstItem(), command.getMaxPageItems());
-        command.setListResult((List<ListenGuidelineDTO>) objects[1]);
-        command.setTotalItems(Integer.parseInt(objects[0].toString()));
-        request.setAttribute(WebConstant.LIST_ITEMS, command);
+//        Object[] objects = listenGuidelineService.findListenGuidelineByProperty(null, command.getFirstItem(), command.getSortExpression(),command.getSortDirection(), command.getFirstItem(), command.getMaxPageItems());
+//        command.setListResult((List<ListenGuidelineDTO>) objects[1]);
+//        command.setTotalItems(Integer.parseInt(objects[0].toString()));
+//        request.setAttribute(WebConstant.LIST_ITEMS, command);
         RequestDispatcher rd = request.getRequestDispatcher("/views/admin/listenguideline/list.jsp");
         rd.forward(request, response);
     }

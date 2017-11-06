@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T> {
     private  Class<T> persitenceClass;
@@ -96,25 +97,40 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
         return result;
     }
 
-    public Object[] findByProperty(String property, Object value, String sortExpression, String sortDirection , Integer offset, Integer limit) {
+    public Object[] findByProperty(Map<String, Object> property, String sortExpression, String sortDirection , Integer offset, Integer limit) {
         List<T> list = new ArrayList<T>();
-        Object totalItem = 0;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
+        Object totalItem = 0;
+        String[] params = new String[property.size()];
+        Object[] values = new Object[property.size()];
+        int i= 0;
+        for(Map.Entry<String, Object> item: property.entrySet()){
+            params[i] = (String) item.getKey();
+            values[i] = item.getValue();
+            i++;
+        }
         try {
-            StringBuilder sql = new StringBuilder("from ");
-            sql.append(getPersitenceClassName());
-            if(property != null && value != null) {
-                sql.append(" where ").append(property).append("=: value");
+            StringBuilder sql1 = new StringBuilder("from ");
+            sql1.append(getPersitenceClassName());
+            if(property.size() > 0){
+                for(int i1 = 0; i1 < params.length; i1++){
+                    if(i1 == 0){
+                        sql1.append(" where ").append(params[i1]).append("= :"+params[i1]+"");
+                    }else {
+                        sql1.append(" and ").append(params[i1]).append("= :"+params[i1]+"");
+                    }
+                }
             }
             if(sortExpression != null && sortDirection != null) {
-                sql.append(" order by ").append(sortExpression);
-                sql.append(" ");
-                sql.append(sortDirection.equals(CoreConstant.SORT_ASC)?"asc":"desc");
+                sql1.append(" order by ").append(sortExpression);
+                sql1.append(" " +(sortDirection.equals(CoreConstant.SORT_ASC)?"asc":"desc"));
             }
-            Query query1 =session.createQuery(sql.toString());
-            if(property != null && value != null) {
-                query1.setParameter("value", value);
+            Query query1 = session.createQuery(sql1.toString());
+            if(property.size() > 0){
+                for(int i2 = 0; i2 < params.length; i2++){
+                    query1.setParameter(params[i2], values[i2]);
+                }
             }
             if(offset != null && offset >= 0 ){
                 query1.setFirstResult(offset);
@@ -124,16 +140,24 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             }
             list = query1.list();
 
-            StringBuilder sql1 = new StringBuilder("select count(*) from ");
-            sql1.append(getPersitenceClassName());
-            if(property != null && value != null) {
-                sql1.append(" where ").append(property).append("=: value");
+            StringBuilder sql2 = new StringBuilder("select count(*) from ");
+            sql2.append(getPersitenceClassName());
+            if(property.size() > 0){
+                for(int k = 0; k < params.length; k++){
+                    if(k == 0){
+                        sql2.append(" where ").append(params[k]).append("= :"+params[k]+"");
+                    }else {
+                        sql2.append(" and ").append(params[k]).append("= :"+params[k]+"");
+                    }
+                }
             }
-            Query query11 =session.createQuery(sql1.toString());
-            if(property != null && value != null) {
-                query11.setParameter("value", value);
+            Query query2 =session.createQuery(sql2.toString());
+            if(property.size() > 0){
+                for(int k1 = 0; k1 < params.length; k1++){
+                    query2.setParameter(params[k1], values[k1]);
+                }
             }
-            totalItem = query11.list().get(0);
+            totalItem = query2.list().get(0);
             transaction.commit();
         }catch (HibernateException e){
             transaction.rollback();
