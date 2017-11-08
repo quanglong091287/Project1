@@ -32,39 +32,72 @@
                                 ${messageResponse}
                         </div>
                     </c:if>
-                    <form action="${formUrl}" method="post" enctype="multipart/form-data">
+                    <%--<form action="${formUrl}" method="post" enctype="multipart/form-data">--%>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label no-padding-right"><fmt:message key="label.guideline.title" bundle="${lang}"/></label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<input type="text" name="pojo.title"/>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<br/>--%>
+                        <%--<br/>--%>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label no-padding-right"><fmt:message key="label.grammarguideline.upload.image" bundle="${lang}"/></label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<input type="file" name="file"/>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<br/>--%>
+                        <%--<br/>--%>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-sm-3 control-label no-padding-right"><fmt:message key="label.guideline.content" bundle="${lang}"/></label>--%>
+                            <%--<div class="col-sm-9">--%>
+                                <%--<input type="text" name="pojo.content"/>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="form-group">--%>
+                            <%--<div class="col-sm-12">--%>
+                                <%--<input type="submit" class="btn btn-white btn-warning btn-bold" value="<fmt:message key="label.done" bundle="${lang}"/>"/>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    <%--</form>--%>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right"></label>
+                        <div class="col-sm-9">
+                            <h2>This is a heading</h2>
+                            <p>This is a paragraphs</p>
+                            <p class="textHide">This is another paragraphs</p>
+                        </div>
+                    </div>
+                    <br/>
+                    </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right"><fmt:message key="label.guideline.title" bundle="${lang}"/></label>
+                            <label class="col-sm-3 control-label no-padding-right"></label>
                             <div class="col-sm-9">
-                                <input type="text" name="pojo.title"/>
+                                <button id="btnHide">Click me to hide paragraphs</button>
                             </div>
                         </div>
-                        <br/>
-                        <br/>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right"><fmt:message key="label.grammarguideline.upload.image" bundle="${lang}"/></label>
-                            <div class="col-sm-9">
-                                <input type="file" name="file"/>
-                            </div>
-                        </div>
-                        <br/>
-                        <br/>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right"><fmt:message key="label.guideline.content" bundle="${lang}"/></label>
-                            <div class="col-sm-9">
-                                <input type="text" name="pojo.content"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <input type="submit" class="btn btn-white btn-warning btn-bold" value="<fmt:message key="label.done" bundle="${lang}"/>"/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        hideAllWhenClickButton();
+    });
+    // function goi theo button
+    function hideAllWhenClickButton1() {
+        $("button").click(function () {
+        $("p").hide();
+    });
+    }
+        // function goi theo id va class
+     function hideAllWhenClickButton() {
+         $("#btnHide").click(function () {
+             $(".textHide").hide();
+         });
+     }
+</script>
 </body>
 </html>
